@@ -1,0 +1,18 @@
+# Inti aplikasi (mode N-Gram) — wajib
+flask>=3.0
+
+# Notebook & pemrosesan data
+numpy
+pandas
+nltk
+jupyter
+nbconvert
+
+# Evaluasi & visualisasi (notebook)
+matplotlib
+seaborn
+scikit-learn
+
+# Mode hybrid (IndoBERT) — opsional, dibutuhkan hanya jika centang "Gunakan IndoBERT"
+torch
+transformers

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koreksi Ejaan Bahasa Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fde047;        /* kuning latar */
+      --paper: #ffffff;     /* kartu */
+      --ink: #111111;       /* hitam pekat */
+      --pink: #ff5da4;
+      --cyan: #38e0ff;
+      --lime: #a3ff57;
+      --orange: #ff8a3d;
+      --red: #ff4d4d;
+      --shadow: 6px 6px 0 var(--ink);
+      --shadow-sm: 4px 4px 0 var(--ink);
+      --border: 3px solid var(--ink);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: var(--bg);
+      background-image: radial-gradient(var(--ink) 1.5px, transparent 1.5px);
+      background-size: 26px 26px;
+      color: var(--ink);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+
+    /* ---------- Header ---------- */
+    header {
+      background: var(--paper);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 22px 24px;
+      margin-bottom: 28px;
+    }
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 700;
+      margin: 0 0 8px;
+      line-height: 1.1;
+      letter-spacing: -.5px;
+    }
+    h1 .tag {
+      display: inline-block;
+      background: var(--cyan);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 2px 10px;
+      transform: rotate(-2deg);
+      margin-right: 6px;
+    }
+    .sub { margin: 0; font-size: .95rem; font-weight: 500; }
+
+    /* ---------- Cards ---------- */
+    .card {
+      background: var(--paper);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    .label {
+      display: inline-block;
+      font-family: "Space Mono", monospace;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: .78rem;
+      background: var(--ink);
+      color: var(--bg);
+      padding: 3px 10px;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      resize: vertical;
+      padding: 14px;
+      border: var(--border);
+      background: #fff;
+      color: var(--ink);
+      font-size: 1.05rem;
+      font-family: inherit;
+      box-shadow: inset 3px 3px 0 rgba(0,0,0,.08);
+    }
+    textarea:focus { outline: none; background: #fffdf0; box-shadow: var(--shadow-sm); }
+
+    .row { display: flex; align-items: center; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+
+    button {
+      font-family: inherit;
+      background: var(--pink);
+      color: var(--ink);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 12px 26px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .05s ease, box-shadow .05s ease;
+    }
+    button:hover { transform: translate(-1px,-1px); box-shadow: 6px 6px 0 var(--ink); }
+    button:active { transform: translate(4px,4px); box-shadow: 0 0 0 var(--ink); }
+    button:disabled { opacity: .6; cursor: progress; transform: none; box-shadow: var(--shadow-sm); }
+
+    .toggle {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 600; font-size: .92rem;
+      background: var(--lime);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 9px 14px;
+      cursor: pointer;
+    }
+    .toggle input { width: 18px; height: 18px; accent-color: var(--ink); cursor: pointer; }
+
+    .hint { font-size: .82rem; font-weight: 500; margin-top: 14px; }
+    .hint code {
+      font-family: "Space Mono", monospace;
+      background: var(--cyan);
+      border: 2px solid var(--ink);
+      padding: 1px 6px;
+    }
+
+    /* ---------- Result ---------- */
+    .result-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+    .badge {
+      display: inline-block;
+      font-family: "Space Mono", monospace;
+      font-weight: 700;
+      background: var(--lime);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 4px 14px;
+      font-size: .85rem;
+    }
+    .badge.zero { background: var(--cyan); }
+    .output {
+      background: #fffdf0;
+      border: var(--border);
+      padding: 16px;
+      font-size: 1.12rem;
+      min-height: 30px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      box-shadow: inset 3px 3px 0 rgba(0,0,0,.06);
+    }
+    mark.fixed {
+      background: var(--lime);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      padding: 0 5px;
+      font-weight: 700;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 12px; border: var(--border); box-shadow: var(--shadow-sm); }
+    th, td { text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--ink); font-size: .98rem; }
+    tr:last-child td { border-bottom: 0; }
+    th { background: var(--ink); color: var(--bg); font-family: "Space Mono", monospace; font-weight: 700; text-transform: uppercase; font-size: .76rem; letter-spacing: .05em; }
+    .from { color: var(--red); text-decoration: line-through; font-weight: 700; font-family: "Space Mono", monospace; }
+    .arrow { font-weight: 700; }
+    .to { color: #0b8a2e; font-weight: 700; font-family: "Space Mono", monospace; }
+
+    .copy { background: var(--cyan); }
+
+    .hidden { display: none; }
+    .err {
+      background: var(--red);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    footer {
+      font-family: "Space Mono", monospace;
+      font-size: .82rem;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 32px;
+      background: var(--ink);
+      color: var(--bg);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1><span class="tag">📝 KOREKSI</span> Ejaan Bahasa Indonesia</h1>
+      <p class="sub">Edit Distance + N-Gram Language Model dengan re-ranking IndoBERT (fine-tuned).</p>
+    </header>
+
+    <div class="card">
+      <span class="label">Teks Masukan</span>
+      <textarea id="input" placeholder="Contoh: Saya ingin makanann enak"></textarea>
+      <div class="row">
+        <button id="btn" onclick="koreksi()">KOREKSI →</button>
+      </div>
+      <p class="hint">Re-ranking IndoBERT: <code>{{ bert_name }}</code> — dimuat saat pertama kali dipakai.</p>
+    </div>
+
+    <div class="card result hidden" id="resultCard">
+      <div class="result-head">
+        <span class="label" style="margin:0;">Hasil Koreksi</span>
+        <span id="badge" class="badge"></span>
+      </div>
+      <div class="output" id="output"></div>
+      <div class="row">
+        <button class="copy" onclick="salin()">SALIN TEKS</button>
+        <span class="hint" id="modeInfo" style="margin:0;"></span>
+      </div>
+      <div id="tableWrap" class="hidden">
+        <p class="label" style="margin:20px 0 0;">Kata yang Diperbaiki</p>
+        <table>
+          <thead><tr><th>Kata salah</th><th></th><th>Koreksi</th></tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card err hidden" id="errCard"></div>
+
+    <footer>UAS NATURAL LANGUAGE PROCESSING · SISTEM KOREKSI EJAAN BAHASA INDONESIA</footer>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    async function koreksi() {
+      const text = $("input").value.trim();
+      const mode = "hybrid";
+      $("errCard").classList.add("hidden");
+      if (!text) { showError("Masukkan teks terlebih dahulu."); return; }
+
+      const btn = $("btn");
+      btn.disabled = true;
+      btn.textContent = "MEMPROSES (IndoBERT)…";
+      try {
+        const res = await fetch("/api/correct", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text, mode })
+        });
+        const data = await res.json();
+        if (!res.ok) { showError(data.error || "Terjadi kesalahan."); return; }
+        render(data);
+      } catch (e) {
+        showError("Tidak dapat terhubung ke server.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "KOREKSI →";
+      }
+    }
+
+    function render(data) {
+      $("resultCard").classList.remove("hidden");
+      $("output").innerHTML = data.output_html;
+      const n = data.num_errors;
+      const badge = $("badge");
+      badge.textContent = n === 0 ? "TIDAK ADA KESALAHAN" : n + " KATA DIPERBAIKI";
+      badge.className = "badge" + (n === 0 ? " zero" : "");
+      $("modeInfo").textContent = "Metode: Edit Distance + N-Gram + IndoBERT";
+
+      const tableWrap = $("tableWrap"), body = $("tableBody");
+      body.innerHTML = "";
+      if (n > 0) {
+        data.corrections.forEach(c => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td class="from">${esc(c.from)}</td><td class="arrow">→</td><td class="to">${esc(c.to)}</td>`;
+          body.appendChild(tr);
+        });
+        tableWrap.classList.remove("hidden");
+      } else {
+        tableWrap.classList.add("hidden");
+      }
+      window._lastOutput = data.output;
+    }
+
+    function salin() {
+      if (window._lastOutput) navigator.clipboard.writeText(window._lastOutput);
+    }
+    function showError(msg) {
+      const c = $("errCard");
+      c.textContent = msg; c.classList.remove("hidden");
+    }
+    function esc(s) {
+      const d = document.createElement("div"); d.textContent = s; return d.innerHTML;
+    }
+    $("input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) koreksi();
+    });
+  </script>
+</body>
+</html>

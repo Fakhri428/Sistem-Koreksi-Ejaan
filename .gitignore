@@ -1,0 +1,15 @@
+# Model fine-tuning besar (>100MB, ditolak GitHub) — simpan lokal saja
+models/indobert-finetuned/model.safetensors
+*.safetensors
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/

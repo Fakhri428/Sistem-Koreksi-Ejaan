@@ -1,0 +1,18 @@
+
+=== Varian: baseline | 3000 kalimat | 198.4s ===
+  Accuracy      : 0.9136
+  Precision     : 0.5459
+  Recall        : 0.7598
+  F1            : 0.6353
+  WER_before    : 0.1199
+  WER_after     : 0.0899
+  WER_reduction : 0.2499
+  CER_before    : 0.0252
+  CER_after     : 0.0216
+  CER_reduction : 0.1421
+  cand_recall   : 0.8137
+  Top1          : 0.7776
+  Top3          : 0.8065
+  Top5          : 0.8137
+  MRR           : 0.7926
+  TP=3363 FP=2798 FN=1063 TN=37454 cand_words=4321

@@ -1,0 +1,18 @@
+
+=== Varian: improved | 3000 kalimat | 505.4s ===
+  Accuracy      : 0.9532
+  Precision     : 0.8561
+  Recall        : 0.6347
+  F1            : 0.7289
+  WER_before    : 0.1199
+  WER_after     : 0.0540
+  WER_reduction : 0.5495
+  CER_before    : 0.0252
+  CER_after     : 0.0129
+  CER_reduction : 0.4867
+  cand_recall   : 0.8095
+  Top1          : 0.7598
+  Top3          : 0.8012
+  Top5          : 0.8095
+  MRR           : 0.7803
+  TP=2809 FP=472 FN=1617 TN=39780 cand_words=4321
